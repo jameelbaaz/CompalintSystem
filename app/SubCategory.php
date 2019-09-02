@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Service;
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,9 +15,11 @@ class SubCategory extends Model
     protected $fillable=['name', 'category_id'];
 
     public function category(){
-        return BelongsTo(Category::class);
+        return $this->BelongsTo(Category::class);
     }
 
-  
+    public function services(){
+        return $this->hasMany(Service::class);
+     }
 
  }
