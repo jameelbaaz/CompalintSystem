@@ -28,7 +28,7 @@
                     <select name="category_id" id="category_id" class="form-control">
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}"
-                                    @if (isset($subcategory)) 
+                                @if (isset($subcategory)) 
                                  @if($category->id ===$subcategory->category_id)
                                    selected
                                 @endif
