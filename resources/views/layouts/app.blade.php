@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -43,11 +43,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -82,8 +82,11 @@
                 </div> 
                 @endif
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        @can('isAdmin')
                         <ul class="list-group">
+                            @if (auth()->user()->isAdmin())
+                                
                             <li class="list-group-item">
                               <a href="{{route('categories.index')}}">Categories</a>
                             </li>
@@ -93,9 +96,24 @@
                             <li class="list-group-item">
                             <a href="{{route('services.index')}}">Services</a>
                             </li>
-                        </ul>                 
+                          
+                            
+                            <li class="list-group-item">
+                              @if (Route::has('register'))        
+                              <a href="{{ route('register') }}">Register</a>
+                            </li>
+                            @endif
+                            @endif
+                        </ul>     
+                        @endcan
+                        
+                        <ul class="list-group">
+                                <li class="list-group-item">
+                                        <a href="{{route('complaints.index')}}">Register Complaint</a>
+                                        </li>
+                        </ul>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                      @yield('content')
                     </div>
                 </div>
@@ -105,6 +123,15 @@
                     @yield('content')
             </div>
         @endauth
+
+      <footer class="bg-dark text-light p-2 fixed-bottom">
+      <div class="container"> 
+           <div class="row">
+            <div class="col-md-12">
+                    Designed and Developed Jameel Ahmed
+            </div>
+        </div></div>
+      </footer>
         </main>
     </div>
     @yield('scripts')

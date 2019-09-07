@@ -11,7 +11,7 @@ class ServicesController extends Controller
 {
 
     public function __construct(){
-        return $this->middleware('auth');
+        $user= $this->middleware(['auth','admin']);
     }
 
     /**
