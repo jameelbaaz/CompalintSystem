@@ -30,9 +30,12 @@ class ComplaintsController extends Controller
      
         if(request()->query('search')){
             $search=request()->query('search');
-            $complaint=Complaint::where('customer_name' ,'LIKE', "%{$search}%")->paginate(5);
+            $complaint=Complaint::where('user_id', '=', auth()->user()->id)
+            ->where('customer_name' ,'LIKE', "%{$search}%")->paginate(5);
+           
         }else{
-            $complaint= Complaint::paginate(5);
+            $complaint=Complaint::where('user_id', '=', auth()->user()->id)
+           ->paginate(5);
         }
     
         return view('complaints.index')

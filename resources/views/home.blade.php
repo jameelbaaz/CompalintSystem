@@ -12,6 +12,15 @@
                     @endif
 
                     You are logged in!
+                <div class="" style="width: 500px">
+                    {!! $chart->container() !!}
+                </div>
                 </div>
             </div>
+@endsection
+@section('scripts')
+{!! $chart->script() !!}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+
 @endsection
